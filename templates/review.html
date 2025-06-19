@@ -1,0 +1,70 @@
+<html>
+<head>
+    <style>
+        #textbox {height:200px; font-size:12pt;}
+    </style>
+</head>
+
+<body>
+    {% if reviews %}
+    <h2>Reviews from Other Users: </h2>
+    <table>
+        <th>Username</th>
+        <th>RecipeID</th>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Number of Stars</th>
+        <th>Review Image</th>
+
+    {% for line in reviews %}
+        <tr>
+            <td>{{line.userName}}</a></td>
+            <td><a>{{line.recipeID}}</a></td>
+            <td>{{line.revTitle}}</td>
+            <td>{{line.revDesc}}</td>
+            <td>{{line.stars}}</td>
+            {% if line.pictureURL %}
+            <td><a href="{{line.pictureURL}}">See Review Image</a></td>
+            {% else %}
+            <td>N/A</td>
+            {% endif %}
+            <!-- <td><button><a href="/recipeInfo/?recipeId={{line.recipeID}}">see details</a></button></td> -->
+        </tr>
+    {% endfor %}
+    </table>
+    {% else %}
+    <h3>Be the First to Leave a Review</h3>
+    {% endif %}
+
+
+    <h2> Rate {{title}} Yourself</h2>
+    {% if reviewed %}
+    <h3> You have already reviewed this recipe </h3>
+    {% else %}
+        <form action="/review_recipe" method="POST">
+            <input type="hidden" name="recipeID" value="{{ recipeID }}">
+            <input type="text" name = "rev_title" placeholder="Enter a title for your review" required/>
+            <select id="stars" name="stars" required>
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+            <br>
+            <input id="textbox" type="text" name = "rev_desc" placeholder="Write a review"  />
+            <br>
+            <input type="url" name="review_img_url" placeholder="Enter an image URL for your review"/>
+            <br>
+            <input type="submit" value = "Submit" />
+            <!-- {% if error %}
+                <p class="error"><strong>Error:</strong> {{error}}</p>
+            {% endif %}  -->
+        </form>
+    {% endif %}
+<a href="/dashboard">Go back</a>
+</body>
+
+
+</html>

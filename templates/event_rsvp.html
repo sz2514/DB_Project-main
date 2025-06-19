@@ -1,0 +1,23 @@
+<html>
+
+<body>
+
+    {% if result %}
+    <h3> Events you can join</h3>
+    <table>
+        <th>Event Name</th>
+
+    {% for line in result %}
+        <tr>
+            <td>{{line.eid}}</td>
+            <td><button><a href="/rsvp/?eid={{line.eid}}">RSVP</a></button></td>
+        </tr>
+    {% endfor %}
+    </table>
+    {% else %}
+    <h3> You have RSVPed for all of the events or this group does not have new events yet</h3>
+    {% endif %}
+</body>
+</html>
+
+    

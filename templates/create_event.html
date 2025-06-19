@@ -1,0 +1,30 @@
+<html>
+
+<body>
+
+
+    <form action="/event_detail" method="POST">
+        <fieldset>
+            <input type="hidden" name="gName" value="{{ gName }}">
+            <div>
+                <input type='text' name="eventsName" required placeholder="EventName" />
+            </div>
+
+            <div>
+                <input type="text" name="eventDescription" placeholder="write the description of your event here"/>
+            </div>
+
+            <div>
+                <input type="submit" value = 'create event' />
+                {% if error %}
+                    <p class="error"><strong>Error:</strong> {{error}}</p>
+                {% endif %}
+            </div>
+        
+        </fieldset>
+    </form>
+
+</body>
+
+
+</html>

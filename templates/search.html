@@ -1,0 +1,54 @@
+<html>
+<head>
+</head>
+<body>
+<h2>Search for Recipes </h2>
+<form action="/search_recipes" method="POST">
+	<input type="text" name = "search_input" placeholder="search some recipes"/>
+    <input type="text" name = "tag" placeholder="recipe tag" />
+    <label for="stars">Number of Stars: </label>
+    <select id="stars" name="stars">
+        <option value="any">any</option>
+        <option value="0">0</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+    </select>
+    <label for="filter">Filter: </label>
+    <select id="filter" name="filter">
+        <option value="alphabetical">Sort alphabetically</option>
+        <option value="rank_by_stars">Rank by Stars</option>
+    </select>
+
+
+	<input type="submit" value = Search />
+    <!-- {% if error %}
+        <p class="error"><strong>Error:</strong> {{error}}</p>
+    {% endif %}  -->
+</form>
+{% if results %}
+    <table>
+        <th>RecipeID</th>
+        <th>Title</th>
+        <th>Posted By</th>
+        <th>Stars</th>
+
+    {% for line in results %}
+    <tr>
+        <td><a href="/recipeInfo/?recipeId={{line.recipeID}}">{{line.recipeID}}</a></td>
+        <td>{{line.title}}</td>
+        <td>{{line.postedBy}}</td>
+        {% if line.avg %}
+            <td>{{line.avg}}</td>
+        {% endif %}
+    </tr>
+    {% endfor %}
+    </table>
+{% endif %}
+
+<a href="/dashboard">Go back</a>
+
+</body>
+</html>

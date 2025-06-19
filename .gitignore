@@ -1,0 +1,6 @@
+/virtual_env
+.DS_Store
+__pycache__
+/DBproject
+/DB_PROJECT/app.py
+/env

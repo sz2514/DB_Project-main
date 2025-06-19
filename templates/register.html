@@ -1,0 +1,79 @@
+<html>
+<head>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<style>
+		* {
+		  box-sizing: border-box;
+		  font-family: Arial, Helvetica, sans-serif;
+		}
+		body {
+		  margin: 0;
+		  font-family: Arial, Helvetica, sans-serif;
+		}
+		#login, .pure-form, .input, h1 {
+			text-align:center;
+		}
+		#stacked-email, #stacked-password{
+			margin:auto;
+		}
+		div{
+			margin: 1rem;
+		}
+		input{
+			padding: 0.5rem;
+    		width: 100%;
+		}
+		.round-submit-button{
+			border-radius: 25px;
+			border: 2px solid #73AD21;
+			padding: 20px;
+			width: 50px;
+			height: 25px;
+		}
+		.content {
+		  padding: 10px;
+		}
+	</style>
+</head>
+<body>
+	<div class="content">
+
+		<div>
+			<div>
+				<h1>Create Account</h1>
+			</div>
+			<form class="pure-form pure-form-stacked" action="/registerAuth" method="POST">
+				<div>
+					<input class="input" type="text" name = "username" placeholder="username" required/>
+				</div>
+				<div>
+					<input class="input" type="password" name = "password" placeholder="password" required/>
+				</div>
+				<div>
+					<input class="input" type="text" name="firstName" id="" required placeholder="First Name" />
+				</div>
+				<div>
+					<input class="input" type="text" name="lastName" id="" required placeholder="Last Name" />
+				</div>
+				<div>
+					<input class="input" type="email" name="emailAddress" id="" required placeholder="Email Address" />
+				</div>
+				<div>
+				<input type="submit" value = "Create Account" />
+				{% if error %}
+					<p class="error"><strong>Error:</strong> {{error}}</p>
+				{% endif %}
+				</div>
+			</form>
+		</div>
+		<div><a href="/">Go back</a></div>
+	</div>
+
+	
+
+
+</body>
+
+
+</html>

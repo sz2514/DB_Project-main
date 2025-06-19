@@ -1,0 +1,126 @@
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<style>
+		* {
+		  box-sizing: border-box;
+		  font-family: Arial, Helvetica, sans-serif;
+		}
+		body {
+		  margin: 0;
+		  font-family: Arial, Helvetica, sans-serif;
+		}
+		#login, .pure-form, .input {
+			text-align:center;
+		}
+		#stacked-email, #stacked-password{
+			margin:auto;
+		}
+		div{
+			margin: 1rem;
+		}
+		.round-submit-button{
+			border-radius: 25px;
+			border: 2px solid #73AD21;
+			padding: 20px;
+			width: 50px;
+			height: 25px;
+		}
+		input{
+			padding: 0.5rem;
+    		width: 60%;
+		}
+		/* Style the content */
+		.content {
+		  padding: 10px;
+		}
+		
+	</style>
+</head>
+<body>
+    <div class="content .pure-g">
+    <h1> Welcome {{username}} </h1>
+    <button class="pure-button" onclick="location.href='/create_recipe'" type="button">Post New Recipe</button>
+    <button class="pure-button" onclick="location.href='/search'" type="button">Search Recipes</button>
+    <button class="pure-button" onclick="location.href='/settings'" type="button">Settings</button>
+
+    {% if recipe_list %}
+    <h3> My Recipes </h3>
+    <table>
+        <th>RecipeID</th>
+        <th>Title</th>
+        <th>Number of Servings</th>
+
+    {% for line in recipe_list %}
+        <tr>
+            <!-- <td><a href="/recipeInfo/" onclick="location.href=this.href+'?recipeId='+line.recipeID;return false;">{{line.recipeID}}</a></td> -->
+            <td>{{line.recipeID}}</a></td>
+            <td>{{line.title}}</td>
+            <td>{{line.numServings}}</td>
+            <td><button class="pure-button"><a href="/recipeInfo/?recipeId={{line.recipeID}}">see details</a></button></td>
+        </tr>
+    {% endfor %}
+    </table>
+    {% else %}
+    <h3> You currently have no recipes posted. Start posting new recipes!</h3>
+    {% endif %}
+
+    {% if groups %}
+        <h3> My Groups </h3>
+        <table>
+            <th>Group Name</th>
+            <th>Group Creator</th>
+
+        {% for line in groups %}
+            <tr>
+                <td>{{line.gName}}</td>
+                <td>{{line.gCreator}}</td>
+                <td><button class="pure-button"><a href="/event_rsvp/?gName={{line.gName}}&gCreator={{line.gCreator}}">See Their Events</a></button></td>
+            </tr>
+        {% endfor %}
+        </table>
+    {% endif %}
+
+    {% if my_events %}
+        <h3> My Events </h3>
+        <table>
+            <th>Event ID</th>
+            <th>Event Name</th>
+            <th>Event Description</th>
+            <th>Event Date</th>
+            <th>Group Name</th>
+            <th>Group Creator</th>
+            
+            
+        {% for line in my_events %}
+            <tr>
+                <td>{{line.eID}}</td>
+                <td>{{line.eName}}</td>
+                <td>{{line.eDesc}}</td>
+                <td>{{line.eDate}}</td>
+                <td>{{line.gName}}</td>
+                <td>{{line.gCreator}}</td>
+            </tr>
+        {% endfor %}
+        </table>
+    {% endif %}
+    <br>
+    <button class="pure-button" onclick="location.href='/join_group'" type=""button>Join Group</button>
+    <button class="pure-button" onclick="location.href='/create_group'" type=""button>Create Group</button>
+    
+    {% if creator_of_gName %}
+    <button class="pure-button"><a href="/create_event/?gName={{creator_of_gName}}">Create Event</a></button>
+    {% endif %}
+<br>
+<div>
+    <form class="pure-form pure-form-stacked" id="logout" action="/logoutAuth" method="POST">
+		<button class="pure-button" id="logoutButton">Log Out</button>
+    </form>
+
+</div>
+</div>
+</body>
+
+
+</html>

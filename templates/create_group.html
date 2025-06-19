@@ -1,0 +1,29 @@
+<form action="/group_detail" method="POST">
+    <fieldset>
+        <!-- <input type="email" name="username" required placeholder="Email" />
+        <input type="password" name="password" placeholder="Password" required/>
+
+        <button type="submit" class="pure-button ">
+            <input type="submit" value = Login />
+            {% if error %}
+                <p class="error"><strong>Error:</strong> {{error}}</p>
+            {% endif %}
+        </button> -->
+
+        <div>
+            <input type='text' name="GroupName" required placeholder="GroupName" />
+        </div>
+
+        <div>
+            <input type="text" name="description" placeholder="write the description of your group here"/>
+        </div>
+
+        <div>
+            <input type="submit" value = 'create group' />
+            {% if error %}
+                <p class="error"><strong>Error:</strong> {{error}}</p>
+            {% endif %}
+        </div>
+    
+    </fieldset>
+</form>

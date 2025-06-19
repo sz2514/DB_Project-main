@@ -1,0 +1,192 @@
+<html>
+<head>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<style>
+		* {
+		  box-sizing: border-box;
+		  font-family: Arial, Helvetica, sans-serif;
+		}
+		body {
+		  margin: 0;
+		  font-family: Arial, Helvetica, sans-serif;
+		}
+		#login, .pure-form, .input {
+			text-align:center;
+		}
+		#stacked-email, #stacked-password{
+			margin:auto;
+		}
+		input{
+			padding: 0.5rem;
+    		width: 100%;
+		}
+		#filldetails{
+			color: white;
+    		text-decoration: none;
+		}
+		div{
+			margin: 1rem;
+		}
+		.round-submit-button{
+			border-radius: 25px;
+			border: 2px solid #73AD21;
+			padding: 20px;
+			width: 50px;
+			height: 25px;
+		}
+		.content {
+		  padding: 10px;
+		}
+	</style>
+	<script type='text/javascript'>
+        function addFields(){
+            // Generate a dynamic number of inputs
+            var number = document.getElementById("ing").value;
+			
+            // Get the element where the inputs will be added to
+            var container = document.getElementById("container");
+            // Remove every children it had before
+            while (container.hasChildNodes()) {
+                container.removeChild(container.lastChild);
+            }
+            for (i = 0; i < number; i++) {
+                // 1. Append a node for iName
+                let input = document.createElement("input");
+                input.type = "text";
+                input.name = "name_ing" + i;
+				input.placeholder = "Ingredient #" + (i+1) + " Name"
+				input.setAttribute('required', '');
+                container.appendChild(input);
+                container.appendChild(document.createElement("br"));
+
+				// 2. Append a node for unitName
+				let input2 = document.createElement("input");
+                input2.type = "text";
+				input2.placeholder = "Ingredient #" + (i+1) + " Unit name (allowed: “ml”, “fl oz”, “g”, “oz”, “mm”, “inch”)"
+                input2.name = "unitName_ing" + i;
+				input2.setAttribute('required', '');
+                container.appendChild(input2);
+                
+				// 3. Append a node for unitName
+                let input3 = document.createElement("input");
+                input3.type = "text";
+                input3.name = "amount_ing" + i;
+				input3.placeholder = "Ingredient #" + (i+1) + " Amount"
+				input3.setAttribute('required', '');
+                container.appendChild(input3);
+                container.appendChild(document.createElement("br"));
+
+				// 3. Append a node for PurchaseLink
+                let input4 = document.createElement("input");
+                input4.type = "text";
+                input4.name = "purchase_link_ing" + i;
+				input4.placeholder = "Ingredient #" + (i+1) + " Purchase link"
+				input4.setAttribute('required', '');
+                container.appendChild(input4);
+				container.appendChild(document.createElement('div'))
+            }
+		}
+			
+		function addRestrictionsFields(){
+			var number = document.getElementById("rst").value;
+			var container = document.getElementById("container_dietary_restrictions");
+			while (container.hasChildNodes()) {
+				container.removeChild(container.lastChild);
+			}
+			for (i = 0; i < number; i++) {
+				let input = document.createElement("input");
+				input.type = "text";
+				input.name = "name_rst" + i;
+				input.placeholder = "Restriction #" + (i+1) + " Name"
+				input.setAttribute('required', '');
+				container.appendChild(input);
+				container.appendChild(document.createElement("br"));
+				
+				let input2 = document.createElement("input");
+				input2.type = "text";
+				input2.name = "desc_rst" + i;
+				input2.setAttribute('required', '');
+				input2.placeholder = "Restriction #" + (i+1) + " Description"
+				
+				container.appendChild(input2);
+				container.appendChild(document.createElement("br"));
+				container.appendChild(document.createElement('div'));
+			}
+		}
+		function addStepFields(){
+			var number = document.getElementById("stp").value;
+			var container = document.getElementById("container_steps");
+			while (container.hasChildNodes()) {
+				container.removeChild(container.lastChild);
+			}
+			for (i = 0; i < number; i++) {
+				container.appendChild(document.createTextNode("Step #" + (i+1) + " Description: "));
+				let input = document.createElement("input");
+				input.type = "text";
+				input.name = "step_desc" + i;
+				input.setAttribute('required', '');
+				container.appendChild(input);
+				container.appendChild(document.createElement("br"));
+				container.appendChild(document.createElement('div'))
+			}
+		}
+
+
+    </script>
+</head>
+<body>
+	<div class="content">
+        <div>
+            <h1>Create Recipe</h1>
+        </div>
+		<div>
+			<form action="/createRecipe" method="POST">
+				<div><input type="text" name = "title" placeholder="Add Title" required/> </br></div>
+                <div><input type="text" name = "numServings" placeholder="Add Number of Servings" required/> </br></div>
+                <div><input type="text" name = "recipeTags" placeholder="Add Recipe Tags" required/> </br></div>
+				<div>
+					<h2>Add Dietary Restrictions</h2>
+					<label>Enter the number of Dietary Restrictions (e.g. 2) below and then click on Fill Details. </label>
+					<input placeholder="Number of Dietary Restrictions " type="text" id="rst" required name="numDietaryRestrictions" value="">
+					<button type="button" class="pure-button pure-button-primary"><a href="#" id="filldetails" onclick="addRestrictionsFields()">Fill Details</a></button>
+    				<div id="container_dietary_restrictions"/>
+					</div>
+				</div>
+                
+                <div>
+					 <h2>Add Ingredients</h2>
+					 <label>Enter the number of Ingredients (e.g. 2) below and then click on Fill Details. </label>
+					 <input placeholder="Number of Ingredients" type="text" id="ing" required name="numIngredients" value="">
+					 <button type="button" class="pure-button pure-button-primary"><a href="#" id="filldetails" onclick="addFields()">Fill Details</a></button>
+    				 <div id="container"/>
+				</div>
+				</div>
+
+				<div>
+					<h2>Add Steps</h2>
+					<label>Enter the number of Steps (e.g. 2) below and then click on Fill Details. </label>
+					<input placeholder="Number of Steps" type="text" id="stp" required name="numSteps" value="">
+					<button type="button" class="pure-button pure-button-primary"><a href="#" id="filldetails" onclick="addStepFields()">Fill Details</a></button>
+					<div id="container_steps"/>
+			   </div>
+
+			   <div>
+				<input type="url" name="recipe_img_url" placeholder="Enter an image URL for your recipe"/>
+			   </div>
+			   
+
+				<div>
+					<input type="submit" value = Register />
+					{% if error %}
+						<p class="error"><strong>Error:</strong> {{error}}</p>
+					{% endif %}
+				</div>
+			</form>
+		</div>
+		<div><button class="pure-button"><a href="/dashboard">Go back</a></button></div>
+	</div>
+</body>
+
+
+</html>

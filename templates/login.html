@@ -1,0 +1,73 @@
+<html>
+<head>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<style>
+		* {
+		  box-sizing: border-box;
+		  font-family: Arial, Helvetica, sans-serif;
+		}
+		body {
+		  margin: 0;
+		  font-family: Arial, Helvetica, sans-serif;
+		}
+		#login, .pure-form, .input {
+			text-align:center;
+		}
+		#stacked-email, #stacked-password{
+			margin:auto;
+		}
+		div{
+			margin: 1rem;
+		}
+		.round-submit-button{
+			border-radius: 25px;
+			border: 2px solid #73AD21;
+			padding: 20px;
+			width: 50px;
+			height: 25px;
+		}
+		input{
+			padding: 0.5rem;
+    		width: 60%;
+		}
+		/* Style the content */
+		.content {
+		  padding: 10px;
+		}
+		
+	</style>
+</head>
+<body>
+	<div class="content .pure-g">
+		<div><h1 id="login"> Log In</h1> </div>
+		
+		<form class="pure-form pure-form-stacked" id="loginForm" action="/loginAuth" method="POST">
+			<fieldset>
+				
+				<div>
+					<input class="input" name="username" id="stacked-email" required placeholder="Username" />
+
+				</div>
+				<div>
+					<input class="input" type="password" name="password" id="stacked-password" required placeholder="Password" />
+				</div>
+				<div>
+					<input type="submit" value = Login />
+					{% if error %}
+						<p class="error"><strong>Error:</strong> {{error}}</p>
+					{% endif %}
+				</div>
+			
+			</fieldset>
+		</form>
+	
+
+		
+		<button class="pure-button"><a href="/">Go back</a></button>
+	</div>
+
+</body>
+
+
+</html>
