@@ -3,7 +3,7 @@ from flask import Flask, render_template, request, session, url_for, redirect, f
 from flask_bcrypt import Bcrypt
 
 
-
+#
 bcrypt = Bcrypt(app)
 #Define a route to hello function
 @app.route('/')
